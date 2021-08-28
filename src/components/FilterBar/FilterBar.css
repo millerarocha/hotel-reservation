@@ -1,0 +1,86 @@
+/* filter */
+
+.filter{
+    background-color: #0984e3;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 15px 30px;
+}
+
+.filter__container{
+    background-color: #fff;
+    padding: 3px;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.filter__input, .filter__select{
+    border: none;
+    outline: none;
+    width: 79%;
+    height: 25px;
+}
+
+.filter__input-icon{
+    color: #b2bec3;
+    margin: 0 3px;
+}
+
+.filter__button{
+    background-color: #d63031;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none; 
+    width: 100px; 
+    cursor: pointer;    
+}
+
+.filter__button-icon{
+    margin: 0 2px;
+}
+
+@media (max-width: 900px) {
+    .filter{
+        justify-content: flex-start;
+        flex-wrap: wrap; 
+        padding: 20px 20px;     
+    }
+
+    .filter__container{
+        width: 45%;
+        margin: 10px 10px;
+    }
+
+    .filter__input, .filter__select{
+        width: 90%;
+    }
+
+    .filter__button{
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 668px) {
+    .filter{
+        flex-direction: column;
+        flex-wrap: wrap; 
+        padding: 10px 10px;     
+    }
+
+    .filter__container{
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .filter__input, .filter__select{
+        width: 90%;
+    }
+
+    .filter__button{
+        margin-left: 0px;
+        height: 40px;
+        width: 100%;
+    }
+}

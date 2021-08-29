@@ -1,0 +1,15 @@
+
+.card__counter{
+    background-color: #0984e3;
+    padding: 10px; 
+    border-radius: 5px; 
+    color: #d2d2d2;  
+}
+
+.card__counter-icon{
+    margin: 0 3px;
+}
+
+.active{
+    color: #fff;
+}

@@ -11,6 +11,7 @@ import FilterBar from './components/FilterBar/FilterBar';
 import DatePicker from './components/DatePicker/DatePicker';
 import Select from './components/Select/Select';
 import Button from './components/Button/Button';
+import Results from './components/Results/Results'
 
 /**
  * Databases
@@ -49,7 +50,7 @@ function App() {
       </FilterBar>
 
       {/* Results */}
-      
+      <Results/>
     </div>
   );
 }

@@ -17,24 +17,32 @@ import Button from '../Button/Button'
 const Card = ({
     item
 }) => {
+    const weekDays = ['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+    const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+    let dateConverter = (date) =>{
+        let dateToConvert = new Date(date);
+        return `${weekDays[dateToConvert.getDay()]} ${dateToConvert.getDate()} de ${months[dateToConvert.getMonth()]} de ${dateToConvert.getFullYear()}`;
+    }
+
     return (
         <div className="card">
-            <img src="./images/la-bamba-de-areco.jpg" alt="" className="card__image"/>
-            <h2 className="card__title">La casa de la montaña</h2>
-            <p className="card__date">Desde el martes, 6 de abril de 2021</p>
-            <p className="card__date">Hasta el martes, 6 de abril de 2021</p>
-            <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, nihil impedit? Assumenda dolore nulla ea nobis sunt, neque unde aliquid quos asperiores qui vitae aut similique maiores optio ipsam quibusdam?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias doloribus nam culpa blanditiis minus id officia, iste ut! Quasi sint autem aliquid esse distinctio blanditiis nihil. Delectus numquam cupiditate neque! </p>
+            <img src={item.photo.default} alt={item.name} className="card__image"/>
+            <h2 className="card__title">{item.name}</h2>
+            <p className="card__date">Desde el {dateConverter(item.availabilityFrom)}</p>
+            <p className="card__date">Hasta el {dateConverter(item.availabilityTo)}</p>
+            <p className="card__description">{item.description}</p>
             <div className="card__info">
                 <i className="fas fa-map-marker-alt card__info-icon"></i>
-                <p className="card__info-text">Villa la angostura, Argentina</p>
+                <p className="card__info-text">{item.city}, {item.country}</p>
             </div>
             <div className="card__info-container">
                 <div className="card__info card__info--medium">
                     <i className="fas fa-bed card__info-icon"></i>
-                    <p className="card__info-text">8 habitaciones</p>
+                    <p className="card__info-text">{item.rooms} habitaciones</p>
                 </div>
                 <ItemCounter
-                    itemNumber='2'
+                    itemNumber={item.price}
                 />                
             </div>
             <Button

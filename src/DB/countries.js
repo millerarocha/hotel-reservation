@@ -1,7 +1,7 @@
 const countries = [
     {
       id: 0,
-      value: 'Ninguno',
+      value: 'cualquier país',
       text: 'Elegir país',
       type: 'country'
     },

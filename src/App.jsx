@@ -1,4 +1,10 @@
 /**
+ * Dependencies
+ */
+import React, { useState } from 'react'
+
+
+/**
  * Styles
  */
 import './App.css';
@@ -19,13 +25,50 @@ import Results from './components/Results/Results'
 import hotels from './DB/hotels.js';
 import countries from './DB/countries.js';
 import prices from './DB/prices';
-import sizes from './DB/sizes'
+import sizes from './DB/sizes';
+import filters from './DB/filters'
 
 function App() {
   const listData = ['cualquier fecha', 'cualquier país', 'cualquier precio', 'cualquier tamaño']
+  const [actualFilters, setActualFilters] = useState(listData);
+  const [actualHotels, setActualHotels] = useState(hotels);
 
+  /**
+   * @method reserveHotel 
+   * @description shows a message of the reserved hotel
+   * @param {*} name 
+   */
   const reserveHotel = (name) =>{
     alert(`hotel ${name} Reservado!`);
+  }
+
+  /**
+   * @method resetFilters 
+   * @description reset default values filters
+   */
+  const resetFilters = () =>{
+    alert('Reseteo de todos los filtros!')
+  }
+
+  /**
+   * @description update the list of filters
+   * @param {*} index 
+   * @param {*} value 
+   */
+  const updateListFilters = (index, value) =>{
+    actualFilters[index] = value;
+    const updateFilters = [...actualFilters]    
+    setActualFilters(updateFilters)  
+  }
+
+  const filterByCountry = (e) => {
+    let country = e.target.value;
+    updateListFilters(1,country);
+  }
+
+  const filterByPrice = (e) => {
+    let price = e.target.value;
+    updateListFilters(2,price);
   }
 
   return (
@@ -35,18 +78,26 @@ function App() {
       {/* Header */}
       <Header
         title='Reserva los mejores Hoteles!'
-        listData = {listData}
+        listData = {actualFilters}
       />
 
       {/* FilterBar */}
       <FilterBar>
+        <DatePicker
+        />
         <DatePicker/>
-        <DatePicker/>
-        <Select options={countries}/>
-        <Select options={prices}/>
+        <Select 
+          options={countries}
+          onChange={filterByCountry}
+        />
+        <Select 
+          options={prices}          
+          onChange={filterByPrice}
+        />
         <Select options={sizes}/>
         <Button
           className='filter__button'
+          onClick={resetFilters}
         >
           <i class="fas fa-trash-alt filter__button-icon"></i>
           Limpiar

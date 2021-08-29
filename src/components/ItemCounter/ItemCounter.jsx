@@ -9,11 +9,11 @@ import React from 'react'
 import './ItemCounter.css'
 
 const ItemCounter = ({
-    itemNumber
+    itemNumber=0
 }) => {
-    const fullItems = new Array(parseInt(starsNumber)).fill(null);
-    const emptyItems = new Array(parseInt(4-starsNumber)).fill(null);
-    
+    const fullItems = new Array(parseInt(itemNumber)).fill(null);
+    const emptyItems = new Array(parseInt(4-itemNumber)).fill(null);
+
     return (        
         <div className="card__counter">
             {fullItems.map((_, idx) => <i className="fas fa-dollar-sign card__counter-icon active" key={idx}></i>)}

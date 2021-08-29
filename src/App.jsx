@@ -50,7 +50,9 @@ function App() {
       </FilterBar>
 
       {/* Results */}
-      <Results/>
+      <Results
+        data={hotels}
+      />
     </div>
   );
 }

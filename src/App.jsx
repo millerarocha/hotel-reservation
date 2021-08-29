@@ -26,39 +26,29 @@ import hotels from './DB/hotels.js';
 import countries from './DB/countries.js';
 import prices from './DB/prices';
 import sizes from './DB/sizes';
-import filters from './DB/filters'
 
 function App() {
   const listData = ['cualquier fecha', 'cualquier país', 'cualquier precio', 'cualquier tamaño']
   const [actualFilters, setActualFilters] = useState(listData);
   const [actualHotels, setActualHotels] = useState(hotels);
 
-  /**
-   * @method reserveHotel 
-   * @description shows a message of the reserved hotel
-   * @param {*} name 
-   */
   const reserveHotel = (name) =>{
     alert(`hotel ${name} Reservado!`);
   }
 
-  /**
-   * @method resetFilters 
-   * @description reset default values filters
-   */
   const resetFilters = () =>{
-    alert('Reseteo de todos los filtros!')
+    window.location.reload()
   }
 
-  /**
-   * @description update the list of filters
-   * @param {*} index 
-   * @param {*} value 
-   */
   const updateListFilters = (index, value) =>{
     actualFilters[index] = value;
     const updateFilters = [...actualFilters]    
     setActualFilters(updateFilters)  
+  }
+
+  const filterHotels = (filterValues) =>{    
+    const hotelsFilter = actualHotels.filter(hotel => hotel.country === [filterValues]);
+    setActualHotels(hotelsFilter);
   }
 
   const filterByCountry = (e) => {
@@ -69,6 +59,11 @@ function App() {
   const filterByPrice = (e) => {
     let price = e.target.value;
     updateListFilters(2,price);
+  }
+
+  const filterBySize = (e) => {
+    let size = e.target.value;
+    updateListFilters(3,size);
   }
 
   return (
@@ -86,7 +81,7 @@ function App() {
         <DatePicker
         />
         <DatePicker/>
-        <Select 
+        <Select
           options={countries}
           onChange={filterByCountry}
         />
@@ -94,7 +89,10 @@ function App() {
           options={prices}          
           onChange={filterByPrice}
         />
-        <Select options={sizes}/>
+        <Select 
+          options={sizes}
+          onChange={filterBySize}
+        />
         <Button
           className='filter__button'
           onClick={resetFilters}
@@ -106,7 +104,7 @@ function App() {
 
       {/* Results */}
       <Results
-        data={hotels}
+        data={actualHotels}
         handleReserve={reserveHotel}
       />
     </div>

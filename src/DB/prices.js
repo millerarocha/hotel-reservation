@@ -1,7 +1,7 @@
 const prices = [
     {
       id: 0,
-      value: 'Todos',
+      value: 'cualquier precio',
       text: 'Elegir precio',
       type: 'price'
     },

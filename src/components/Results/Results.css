@@ -1,8 +1,8 @@
 /* Cards */
 
 .cards{
-    padding: 20px 3%;
+    padding: 20px 10px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 }

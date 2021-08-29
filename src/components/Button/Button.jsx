@@ -2,11 +2,16 @@ import React from 'react'
 
 const Button = ({
     className,
-    children
+    children,
+    onClick,
+    name=''
 }) => {
     return (
         <div>
-            <button className={className}>
+            <button 
+                className={className}
+                onClick={onClick}
+            >
                 {children}
             </button>
         </div>

@@ -15,7 +15,8 @@ import ItemCounter from '../ItemCounter/ItemCounter'
 import Button from '../Button/Button'
 
 const Card = ({
-    item
+    item,
+    handleReserve
 }) => {
     const weekDays = ['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
     const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -47,6 +48,7 @@ const Card = ({
             </div>
             <Button
                 className='card__button'
+                onClick={()=>handleReserve(item.name)}
             >
             Reservar
             </Button>

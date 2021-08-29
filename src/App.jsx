@@ -22,7 +22,11 @@ import prices from './DB/prices';
 import sizes from './DB/sizes'
 
 function App() {
-  const listData = ['fecha', 'país', 'precio', 'tamaño']
+  const listData = ['cualquier fecha', 'cualquier país', 'cualquier precio', 'cualquier tamaño']
+
+  const reserveHotel = (name) =>{
+    alert(`hotel ${name} Reservado!`);
+  }
 
   return (
     <div 
@@ -52,6 +56,7 @@ function App() {
       {/* Results */}
       <Results
         data={hotels}
+        handleReserve={reserveHotel}
       />
     </div>
   );

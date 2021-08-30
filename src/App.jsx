@@ -30,8 +30,11 @@ import sizes from './DB/sizes';
 function App() {
   const listData = ['cualquier fecha', 'cualquier país', 'cualquier precio', 'cualquier tamaño']
   const [listFilters, setlistFilters] = useState(listData);
+  const [filterValues, setFilterValues] = useState(['','','']);
   const [actualHotels, setActualHotels] = useState(hotels);
   const [actualCountry, setActualCountry] = useState("cualquier país");
+  const [actualPrice, setActualPrice] = useState("cualquier precio");
+  const [actualSize, setActualSize] = useState("cualquier tamaño");
 
   const reserveHotel = (name) =>{
     alert(`hotel ${name} Reservado!`);
@@ -41,6 +44,8 @@ function App() {
     setlistFilters(listData);
     setActualHotels(hotels);
     setActualCountry("cualquier país");
+    setActualSize("cualquier tamaño");
+    setActualPrice("cualquier precio")
   }
 
   const updateListFilters = (index, value) =>{
@@ -49,8 +54,15 @@ function App() {
     setlistFilters(updateFilters)  
   }
 
+  const updateFilters = (index,value) => {
+    filterValues[index] = value;
+    const updateFilters = [...filterValues];
+    setFilterValues(updateFilters);
+  }
+
   const filterHotels = (filterValue) =>{    
-    const hotelsFilter = actualHotels.filter(hotel => hotel.country === filterValue);
+    const hotelsFilter = actualHotels.filter(hotel => hotel.country === filterValue
+    );
     setActualHotels(hotelsFilter);
   }
 
@@ -58,18 +70,19 @@ function App() {
     let country = e.target.value;
     updateListFilters(1,country);
     setActualCountry(country);
-    console.log(country);
     filterHotels(country);
   }
 
   const filterByPrice = (e) => {
     let price = e.target.value;
     updateListFilters(2,price);
+    setActualPrice(price)
   }
 
   const filterBySize = (e) => {
     let size = e.target.value;
     updateListFilters(3,size);
+    setActualSize(size);
   }
 
   return (
@@ -93,10 +106,12 @@ function App() {
           onChange={filterByCountry}
         />
         <Select 
+          value={actualPrice}
           options={prices}          
           onChange={filterByPrice}
         />
-        <Select 
+        <Select
+          value={actualSize} 
           options={sizes}
           onChange={filterBySize}
         />

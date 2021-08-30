@@ -30,7 +30,7 @@ import sizes from './DB/sizes';
 function App() {
   const listData = ['cualquier fecha', 'cualquier país', 'cualquier precio', 'cualquier tamaño']
   const [listFilters, setlistFilters] = useState(listData);
-  const [filterValues, setFilterValues] = useState(['','','']);
+  const [filterValues, setFilterValues] = useState([]);
   const [actualHotels, setActualHotels] = useState(hotels);
   const [actualCountry, setActualCountry] = useState("cualquier país");
   const [actualPrice, setActualPrice] = useState("cualquier precio");
@@ -43,6 +43,7 @@ function App() {
   const resetFilters = () =>{
     setlistFilters(listData);
     setActualHotels(hotels);
+    setFilterValues([]);
     setActualCountry("cualquier país");
     setActualSize("cualquier tamaño");
     setActualPrice("cualquier precio")
@@ -60,23 +61,53 @@ function App() {
     setFilterValues(updateFilters);
   }
 
-  const filterHotels = (filterValue) =>{    
-    const hotelsFilter = actualHotels.filter(hotel => hotel.country === filterValue
-    );
+  const filterHotels = (filterValues) =>{ 
+    let hotelsToFilter = hotels;
+
+    const hotelsFilter = hotelsToFilter.filter(hotel => {
+      if(filterValues.length === 1){
+        return hotel.country === filterValues[0];  
+      }else if(filterValues.length === 2 && filterValues[0]){
+        return hotel.country === filterValues[0] && hotel.price === filterValues[1]
+      }else if(filterValues.length === 2 && filterValues[1]){
+        return hotel.price === filterValues[1] 
+      }
+
+        
+    });
     setActualHotels(hotelsFilter);
+    console.log(filterValues, filterValues.length);        
   }
 
   const filterByCountry = (e) => {
     let country = e.target.value;
     updateListFilters(1,country);
     setActualCountry(country);
-    filterHotels(country);
+    updateFilters(0,country);
+
+    filterHotels(filterValues);
   }
 
   const filterByPrice = (e) => {
     let price = e.target.value;
     updateListFilters(2,price);
-    setActualPrice(price)
+    setActualPrice(price);
+
+    let priceNumber=0;
+
+    if(price === 'Económico'){
+      priceNumber = 1;
+    }else if(price === 'Comfort'){
+      priceNumber = 2;
+    }else if(price === 'Lujos'){
+      priceNumber = 3;
+    }else if(price === 'Magnífico'){
+      priceNumber = 4
+    }
+
+    updateFilters(1,priceNumber);
+
+    filterHotels(filterValues);
   }
 
   const filterBySize = (e) => {

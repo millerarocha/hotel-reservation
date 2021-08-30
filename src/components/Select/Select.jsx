@@ -2,12 +2,17 @@ import React from 'react'
 
 const Select = ({
     options=[],
-    onChange
+    onChange,
+    value
 }) => {
     return (        
         <div className="filter__container">
             <i className="fas fa-flag filter__input-icon"></i>
-            <select id="" className="filter__select" onChange={onChange}>
+            <select 
+                className="filter__select" 
+                value={value}  
+                onChange={onChange}
+            >
                 {options.map((option)=>                
                     <option 
                         key={option.value} 

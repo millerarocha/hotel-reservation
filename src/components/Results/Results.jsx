@@ -21,6 +21,7 @@ const Results = ({
         <div className='cards'>
             {data.map((item)=>                
                 <Card
+                    key={item.id}
                     item={item}
                     handleReserve={handleReserve}
                 />

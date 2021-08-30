@@ -29,31 +29,37 @@ import sizes from './DB/sizes';
 
 function App() {
   const listData = ['cualquier fecha', 'cualquier país', 'cualquier precio', 'cualquier tamaño']
-  const [actualFilters, setActualFilters] = useState(listData);
+  const [listFilters, setlistFilters] = useState(listData);
   const [actualHotels, setActualHotels] = useState(hotels);
+  const [actualCountry, setActualCountry] = useState("cualquier país");
 
   const reserveHotel = (name) =>{
     alert(`hotel ${name} Reservado!`);
   }
 
   const resetFilters = () =>{
-    window.location.reload()
+    setlistFilters(listData);
+    setActualHotels(hotels);
+    setActualCountry("cualquier país");
   }
 
   const updateListFilters = (index, value) =>{
-    actualFilters[index] = value;
-    const updateFilters = [...actualFilters]    
-    setActualFilters(updateFilters)  
+    listFilters[index] = value;
+    const updateFilters = [...listFilters]    
+    setlistFilters(updateFilters)  
   }
 
-  const filterHotels = (filterValues) =>{    
-    const hotelsFilter = actualHotels.filter(hotel => hotel.country === [filterValues]);
+  const filterHotels = (filterValue) =>{    
+    const hotelsFilter = actualHotels.filter(hotel => hotel.country === filterValue);
     setActualHotels(hotelsFilter);
   }
 
   const filterByCountry = (e) => {
     let country = e.target.value;
     updateListFilters(1,country);
+    setActualCountry(country);
+    console.log(country);
+    filterHotels(country);
   }
 
   const filterByPrice = (e) => {
@@ -73,7 +79,7 @@ function App() {
       {/* Header */}
       <Header
         title='Reserva los mejores Hoteles!'
-        listData = {actualFilters}
+        listData = {listFilters}
       />
 
       {/* FilterBar */}
@@ -82,6 +88,7 @@ function App() {
         />
         <DatePicker/>
         <Select
+          value={actualCountry}
           options={countries}
           onChange={filterByCountry}
         />
@@ -97,7 +104,7 @@ function App() {
           className='filter__button'
           onClick={resetFilters}
         >
-          <i class="fas fa-trash-alt filter__button-icon"></i>
+          <i className="fas fa-trash-alt filter__button-icon"></i>
           Limpiar
         </Button>
       </FilterBar>

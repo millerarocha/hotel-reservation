@@ -70,13 +70,40 @@ function App() {
       }else if(filterValues.length === 2 && filterValues[0]){
         return hotel.country === filterValues[0] && hotel.price === filterValues[1]
       }else if(filterValues.length === 2 && filterValues[1]){
-        return hotel.price === filterValues[1] 
+        return hotel.price === filterValues[1]; 
+      }else if(filterValues.length === 3 && !filterValues[0] && !filterValues[1]){        
+        if(filterValues[2]==='Pequeño'){
+          return hotel.rooms < 10;
+        }else if(filterValues[2]==='Grande'){
+          return hotel.rooms > 20;
+        }else if(filterValues[2]==='Mediano'){
+          return hotel.rooms > 10 && hotel.rooms < 20;
+        }
+      }else if(filterValues.length === 3 && filterValues[1] !== undefined && !filterValues[0]){
+        console.log("Hola todos!")
+        if(filterValues[2]==='Pequeño'){
+          return hotel.rooms < 10 && hotel.price === filterValues[1];
+        }else if(filterValues[2]==='Grande'){
+          return hotel.rooms > 20 && hotel.price === filterValues[1];
+        }else if(filterValues[2]==='Mediano'){
+          return hotel.rooms > 10 && hotel.rooms < 20 && hotel.price === filterValues[1];
+        }
+      }else if(filterValues.length === 3 && filterValues[0] !== undefined && filterValues[1] !== undefined && filterValues[2] !== undefined){
+        console.log("HOla amigos!")
+        if(filterValues[2]==='Pequeño'){
+          return hotel.rooms < 10 && hotel.price === filterValues[1] && hotel.country === filterValues[0];
+        }else if(filterValues[2]==='Grande'){
+          return hotel.rooms > 20 && hotel.price === filterValues[1] && hotel.country === filterValues[0];
+        }else if(filterValues[2]==='Mediano'){
+          return hotel.rooms > 10 && hotel.rooms < 20 && hotel.price === filterValues[1] && hotel.country === filterValues[0];
+        }
       }
 
         
     });
     setActualHotels(hotelsFilter);
-    console.log(filterValues, filterValues.length);        
+    console.log(filterValues, filterValues.length);
+    console.log(filterValues.length === 3 && filterValues[0] !== undefined && filterValues[1] !== undefined && filterValues[2] !== undefined)     
   }
 
   const filterByCountry = (e) => {
@@ -114,6 +141,9 @@ function App() {
     let size = e.target.value;
     updateListFilters(3,size);
     setActualSize(size);
+    updateFilters(2,size);
+
+    filterHotels(filterValues);
   }
 
   return (

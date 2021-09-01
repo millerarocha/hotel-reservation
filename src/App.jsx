@@ -35,6 +35,8 @@ function App() {
   const [actualCountry, setActualCountry] = useState("cualquier país");
   const [actualPrice, setActualPrice] = useState("cualquier precio");
   const [actualSize, setActualSize] = useState("cualquier tamaño");
+  const [initDate, setInitDate] = useState("");
+  const [lastDate, setLastDate] = useState("");
 
   const reserveHotel = (name) =>{
     alert(`hotel ${name} Reservado!`);
@@ -46,7 +48,9 @@ function App() {
     setFilterValues([]);
     setActualCountry("cualquier país");
     setActualSize("cualquier tamaño");
-    setActualPrice("cualquier precio")
+    setActualPrice("cualquier precio");
+    setInitDate("");
+    setLastDate("");
   }
 
   const updateListFilters = (index, value) =>{
@@ -146,6 +150,58 @@ function App() {
     filterHotels(filterValues);
   }
 
+  /**
+   * Date filters functions 
+   */
+
+  const weekDays = ['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+  const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+  let dateConverter = (date) =>{
+      let dateToConvert = new Date(date);
+      return `${weekDays[dateToConvert.getDay()]} ${dateToConvert.getDate()} de ${months[dateToConvert.getMonth()]} de ${dateToConvert.getFullYear()}`;
+  }
+
+  const dateMessages = (initDate, lastDate) => {
+    
+
+    let message = ""
+    if(initDate === "" && lastDate === ""){
+      message = "cualquier fecha";
+    }else if(lastDate === ""){
+      message = 'Seleccione la fecha final';
+    }else if(initDate === ""){
+      message = "¡Debe seleccionar una Fecha inicial!";
+    }else{
+      const initDateMs =  Date.parse(initDate);
+      const lastDateMs = Date.parse(lastDate);
+
+      const initDateMessage = dateConverter(initDateMs);
+      const lastDateMessage = dateConverter(lastDateMs);
+
+      if(initDate >= lastDate){
+        message = 'fecha inicial debe ser menor que la fecha final'
+      }else{
+        message = `desde ${initDateMessage} hasta ${lastDateMessage}`;
+      }      
+    }
+    console.log(Date.parse(initDate),lastDate);
+
+    updateListFilters(0,message);
+  }
+
+  const filterInitDate = (e) => {
+    let date = e.target.value;
+    dateMessages(date,lastDate);
+    setInitDate(date);
+  }
+
+  const filterLastDate = (e) => {
+    let date = e.target.value;
+    dateMessages(initDate,date);
+    setLastDate(date);
+  }
+
   return (
     <div 
       className="App container"
@@ -159,8 +215,13 @@ function App() {
       {/* FilterBar */}
       <FilterBar>
         <DatePicker
+          value={initDate}
+          onChange={filterInitDate}
         />
-        <DatePicker/>
+        <DatePicker
+          value={lastDate}          
+          onChange={filterLastDate}
+        />
         <Select
           value={actualCountry}
           options={countries}

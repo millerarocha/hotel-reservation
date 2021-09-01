@@ -5,6 +5,7 @@ import React from 'react'
 
 const DatePicker = ({
     onChange,
+    value=''
 
 }) => {
     return (
@@ -15,6 +16,7 @@ const DatePicker = ({
                 type="date" 
                 placeholder="Fecha inicial"
                 onChange={onChange}
+                value={value}
             />
         </div>
     )

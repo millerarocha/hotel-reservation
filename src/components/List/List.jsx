@@ -7,7 +7,7 @@ const List = ({
     return (
         <div>
             {data.map((item)=>
-                <p key={item} className={className} >En {item}</p>
+                <p key={item} className={className} >{item}</p>
             )}    
         </div>
     )

@@ -37,6 +37,18 @@ function App() {
   const [actualSize, setActualSize] = useState("cualquier tamaño");
   const [initDate, setInitDate] = useState("");
   const [lastDate, setLastDate] = useState("");
+  const [message, setMessage] = useState("");
+
+  const showMessage = (hotels) =>{
+    let newMessage;
+    if(hotels.length === 0){
+      newMessage = "No hay disponibilidad de hoteles con estos filtros";
+    }else{
+      newMessage = "";
+    }
+
+    setMessage(newMessage)
+  }
 
   const reserveHotel = (name) =>{
     alert(`hotel ${name} Reservado!`);
@@ -51,6 +63,7 @@ function App() {
     setActualPrice("cualquier precio");
     setInitDate("");
     setLastDate("");
+    setMessage("");
   }
 
   const updateListFilters = (index, value) =>{
@@ -150,7 +163,8 @@ function App() {
 
         
     });
-    setActualHotels(hotelsFilter);     
+    setActualHotels(hotelsFilter); 
+    showMessage(hotelsFilter);   
   }
 
   const filterByCountry = (e) => {
@@ -294,6 +308,7 @@ function App() {
       </FilterBar>
 
       {/* Results */}
+      <h3>{message}</h3>
       <Results
         data={actualHotels}
         handleReserve={reserveHotel}

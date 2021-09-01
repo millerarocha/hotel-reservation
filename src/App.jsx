@@ -84,7 +84,6 @@ function App() {
           return hotel.rooms > 10 && hotel.rooms < 20;
         }
       }else if(filterValues.length === 3 && filterValues[1] !== undefined && !filterValues[0]){
-        console.log("Hola todos!")
         if(filterValues[2]==='Pequeño'){
           return hotel.rooms < 10 && hotel.price === filterValues[1];
         }else if(filterValues[2]==='Grande'){
@@ -93,7 +92,6 @@ function App() {
           return hotel.rooms > 10 && hotel.rooms < 20 && hotel.price === filterValues[1];
         }
       }else if(filterValues.length === 3 && filterValues[0] !== undefined && filterValues[1] !== undefined && filterValues[2] !== undefined){
-        console.log("HOla amigos!")
         if(filterValues[2]==='Pequeño'){
           return hotel.rooms < 10 && hotel.price === filterValues[1] && hotel.country === filterValues[0];
         }else if(filterValues[2]==='Grande'){
@@ -101,13 +99,58 @@ function App() {
         }else if(filterValues[2]==='Mediano'){
           return hotel.rooms > 10 && hotel.rooms < 20 && hotel.price === filterValues[1] && hotel.country === filterValues[0];
         }
+      }else if(filterValues.length === 5 && filterValues[3] && filterValues[4] && filterValues[0] === undefined && filterValues[1] === undefined && filterValues[2] === undefined){
+        const initDateMs =  Date.parse(filterValues[3]);
+        const lastDateMs = Date.parse(filterValues[4]);
+        return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs;
+      }else if(filterValues.length === 5 && filterValues[3] && filterValues[4] && filterValues[0] && filterValues[1] === undefined && filterValues[2] === undefined){
+        const initDateMs =  Date.parse(filterValues[3]);
+        const lastDateMs = Date.parse(filterValues[4]);
+        return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.country === filterValues[0];
+      }else if(filterValues.length === 5 && filterValues[3] && filterValues[4] && filterValues[0] && filterValues[1] && filterValues[2] === undefined){
+        const initDateMs =  Date.parse(filterValues[3]);
+        const lastDateMs = Date.parse(filterValues[4]);
+        return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.country === filterValues[0] && hotel.price === filterValues[1];
+      }else if(filterValues.length === 5 && filterValues[3] && filterValues[4] && filterValues[0] === undefined && filterValues[1] && filterValues[2] === undefined){
+        const initDateMs =  Date.parse(filterValues[3]);
+        const lastDateMs = Date.parse(filterValues[4]);
+        return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.price === filterValues[1];
+      }
+      else if(filterValues.length === 5 && filterValues[3] && filterValues[4] && filterValues[0] === undefined && filterValues[1] ==undefined && filterValues[2]){
+        const initDateMs =  Date.parse(filterValues[3]);
+        const lastDateMs = Date.parse(filterValues[4]);
+        if(filterValues[2]==='Pequeño'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms < 10;
+        }else if(filterValues[2]==='Grande'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms > 20;
+        }else if(filterValues[2]==='Mediano'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms > 10 && hotel.rooms < 20;
+        }
+      }else if(filterValues.length === 5 && filterValues[3] && filterValues[4] && filterValues[0] && filterValues[1] ==undefined && filterValues[2]){
+        const initDateMs =  Date.parse(filterValues[3]);
+        const lastDateMs = Date.parse(filterValues[4]);
+        if(filterValues[2]==='Pequeño'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms < 10 && hotel.country === filterValues[0];
+        }else if(filterValues[2]==='Grande'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms > 20 && hotel.country === filterValues[0];
+        }else if(filterValues[2]==='Mediano'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms > 10 && hotel.rooms < 20 && hotel.country === filterValues[0];
+        }
+      }else if(filterValues.length === 5 && filterValues[3] && filterValues[4] && filterValues[0] && filterValues[1] && filterValues[2]){
+        const initDateMs =  Date.parse(filterValues[3]);
+        const lastDateMs = Date.parse(filterValues[4]);
+        if(filterValues[2]==='Pequeño'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms < 10 && hotel.country === filterValues[0] && hotel.price === filterValues[1];
+        }else if(filterValues[2]==='Grande'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms > 20 && hotel.country === filterValues[0] && hotel.price === filterValues[1];
+        }else if(filterValues[2]==='Mediano'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms > 10 && hotel.rooms < 20 && hotel.country === filterValues[0] && hotel.price === filterValues[1];
+        }
       }
 
         
     });
-    setActualHotels(hotelsFilter);
-    console.log(filterValues, filterValues.length);
-    console.log(filterValues.length === 3 && filterValues[0] !== undefined && filterValues[1] !== undefined && filterValues[2] !== undefined)     
+    setActualHotels(hotelsFilter);     
   }
 
   const filterByCountry = (e) => {
@@ -163,8 +206,6 @@ function App() {
   }
 
   const dateMessages = (initDate, lastDate) => {
-    
-
     let message = ""
     if(initDate === "" && lastDate === ""){
       message = "cualquier fecha";
@@ -182,11 +223,9 @@ function App() {
       if(initDate >= lastDate){
         message = 'fecha inicial debe ser menor que la fecha final'
       }else{
-        message = `desde ${initDateMessage} hasta ${lastDateMessage}`;
+        message = `desde el ${initDateMessage} hasta el ${lastDateMessage}`;
       }      
     }
-    console.log(Date.parse(initDate),lastDate);
-
     updateListFilters(0,message);
   }
 
@@ -194,12 +233,20 @@ function App() {
     let date = e.target.value;
     dateMessages(date,lastDate);
     setInitDate(date);
+    updateFilters(3,date);
+    if(lastDate!=''){
+      filterHotels(filterValues);
+    }
   }
 
   const filterLastDate = (e) => {
     let date = e.target.value;
     dateMessages(initDate,date);
     setLastDate(date);
+    updateFilters(4,date);
+    if(initDate!=''){
+      filterHotels(filterValues);
+    }
   }
 
   return (

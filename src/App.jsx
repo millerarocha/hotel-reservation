@@ -149,6 +149,16 @@ function App() {
         }else if(filterValues[2]==='Mediano'){
           return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms > 10 && hotel.rooms < 20 && hotel.country === filterValues[0];
         }
+      }else if(filterValues.length === 5 && filterValues[3] && filterValues[4] && filterValues[0] == undefined && filterValues[1] && filterValues[2]){
+        const initDateMs =  Date.parse(filterValues[3]);
+        const lastDateMs = Date.parse(filterValues[4]);
+        if(filterValues[2]==='Pequeño'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms < 10 && hotel.price === filterValues[1];
+        }else if(filterValues[2]==='Grande'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms > 20 && hotel.price === filterValues[1];
+        }else if(filterValues[2]==='Mediano'){
+          return hotel.availabilityFrom >= initDateMs && hotel.availabilityTo <= lastDateMs && hotel.rooms > 10 && hotel.rooms < 20 && hotel.price === filterValues[1];
+        }
       }else if(filterValues.length === 5 && filterValues[3] && filterValues[4] && filterValues[0] && filterValues[1] && filterValues[2]){
         const initDateMs =  Date.parse(filterValues[3]);
         const lastDateMs = Date.parse(filterValues[4]);

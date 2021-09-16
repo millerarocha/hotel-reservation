@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/hotel-reservation-react-app/static/css/main.11787ca4.chunk.css",
+    "main.js": "/hotel-reservation-react-app/static/js/main.981d2224.chunk.js",
+    "main.js.map": "/hotel-reservation-react-app/static/js/main.981d2224.chunk.js.map",
+    "runtime-main.js": "/hotel-reservation-react-app/static/js/runtime-main.be74720f.js",
+    "runtime-main.js.map": "/hotel-reservation-react-app/static/js/runtime-main.be74720f.js.map",
+    "static/js/2.74ece1ab.chunk.js": "/hotel-reservation-react-app/static/js/2.74ece1ab.chunk.js",
+    "static/js/2.74ece1ab.chunk.js.map": "/hotel-reservation-react-app/static/js/2.74ece1ab.chunk.js.map",
+    "index.html": "/hotel-reservation-react-app/index.html",
+    "static/css/main.11787ca4.chunk.css.map": "/hotel-reservation-react-app/static/css/main.11787ca4.chunk.css.map",
+    "static/js/2.74ece1ab.chunk.js.LICENSE.txt": "/hotel-reservation-react-app/static/js/2.74ece1ab.chunk.js.LICENSE.txt",
+    "static/media/alto-atacama.jpg": "/hotel-reservation-react-app/static/media/alto-atacama.a6846d24.jpg",
+    "static/media/azur-real.jpg": "/hotel-reservation-react-app/static/media/azur-real.9a591fc1.jpg",
+    "static/media/campo-tinto.jpg": "/hotel-reservation-react-app/static/media/campo-tinto.f27bca75.jpg",
+    "static/media/casa-higueras.jpg": "/hotel-reservation-react-app/static/media/casa-higueras.0c6c7433.jpg",
+    "static/media/casa-turquesa.jpg": "/hotel-reservation-react-app/static/media/casa-turquesa.8e9179ce.jpg",
+    "static/media/entre-cielos.jpg": "/hotel-reservation-react-app/static/media/entre-cielos.671c5a26.jpg",
+    "static/media/huacalera.jpg": "/hotel-reservation-react-app/static/media/huacalera.7542bc14.jpg",
+    "static/media/la-bamba-de-areco.jpg": "/hotel-reservation-react-app/static/media/la-bamba-de-areco.0ccacda0.jpg",
+    "static/media/luma-casa-de-montana.jpg": "/hotel-reservation-react-app/static/media/luma-casa-de-montana.0501710d.jpg",
+    "static/media/merced-del-alto.jpg": "/hotel-reservation-react-app/static/media/merced-del-alto.3daaee16.jpg",
+    "static/media/rincon-del-socorro.jpg": "/hotel-reservation-react-app/static/media/rincon-del-socorro.98161c62.jpg",
+    "static/media/sainte-jeanne.jpg": "/hotel-reservation-react-app/static/media/sainte-jeanne.4ff84aba.jpg",
+    "static/media/tierra-patagonia.jpg": "/hotel-reservation-react-app/static/media/tierra-patagonia.aad2b011.jpg",
+    "static/media/uxua-casa.jpg": "/hotel-reservation-react-app/static/media/uxua-casa.ebf46cc5.jpg",
+    "static/media/vik-chile.jpg": "/hotel-reservation-react-app/static/media/vik-chile.341113d7.jpg",
+    "static/media/vila-da-santa.jpg": "/hotel-reservation-react-app/static/media/vila-da-santa.a64e91d2.jpg",
+    "static/media/vira-vira.jpg": "/hotel-reservation-react-app/static/media/vira-vira.17468e7f.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.be74720f.js",
+    "static/js/2.74ece1ab.chunk.js",
+    "static/css/main.11787ca4.chunk.css",
+    "static/js/main.981d2224.chunk.js"
+  ]
+}
